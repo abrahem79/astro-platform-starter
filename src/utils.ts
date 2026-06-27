@@ -55,3 +55,19 @@ export function cacheHeaders(maxAgeDays = 365, cacheTags?: string[]): Record<str
 }
 
 export const uploadDisabled = import.meta.env.PUBLIC_DISABLE_UPLOADS?.toLowerCase() === 'true';
+
+export interface TronLinkDeepLinkParams {
+    action: string;
+    protocol: string;
+    version: string;
+    [key: string]: unknown;
+}
+
+// Builds a TronLink deep link. The `param` query value must be a urlencoded JSON string.
+// Usage: <a href={buildTronLinkDeepLink()}>Open DApp</a>
+export function buildTronLinkDeepLink(
+    params: TronLinkDeepLinkParams = { action: 'open', protocol: 'tronlink', version: '1.0' }
+): string {
+    const encoded = encodeURIComponent(JSON.stringify(params));
+    return `tronlinkoutside://pull.activity?param=${encoded}`;
+}
