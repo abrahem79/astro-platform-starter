@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Markdown from '../components/Markdown.astro';
+import BalancesViewer from '../components/BalancesViewer.tsx';
+
+const explainer = `
+This page uses the [Sim by Dune Balances API](https://docs.sim.dune.com) to look up real-time native and ERC20 token
+balances for any EVM wallet address, including token metadata and USD valuations. Enter a wallet address below to see
+its balances across supported chains. Requires \`SIM_API_KEY\` to be set in the site's environment variables.
+`;
+---
+
+<Layout title="Token Balances">
+    <h1 class="mb-10">Token Balances</h1>
+    <Markdown content={explainer} class="mb-12" />
+    <BalancesViewer client:load />
+</Layout>
